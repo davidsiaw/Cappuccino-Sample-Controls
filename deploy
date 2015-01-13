@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# generate static code
+bundle exec middleman build
+
+#generate optimized capps
+pushd build
+jake deploy
+popd
+
+# pull the old repository
+git clone -b gh-pages --single-branch git@github.com:davidsiaw/cappuccino-demos
+
+# add and push new content
+pushd cappuccino-demos
+git config --global user.email "davidsiaw@gmail.com"
+git config --global user.name "David Siaw (via Travis CI)"
+git config --global push.default simple
+rm -r *
+cp -r ../build/Build/Release/SampleControls/* .
+git add *
+git add -u
+git commit -m "Update site"
+git push
+popd
+
+# cleanup
+rm -rf cappuccino-demos

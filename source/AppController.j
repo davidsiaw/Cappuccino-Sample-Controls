@@ -5,8 +5,8 @@
  * Created by You on February 2, 2011.
  * Copyright 2011, Your Company All rights reserved.
  */
-
-@import <Foundation/CPObject.j>
+@import <Foundation/Foundation.j>
+@import <AppKit/AppKit.j>
 
 var defaultViewRect;
 var dataStructure = {name: "Root", sub: [

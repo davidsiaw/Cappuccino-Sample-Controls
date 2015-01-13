@@ -1,0 +1,14 @@
+language: ruby
+rvm:
+- 2.0.0
+env:
+- PATH="/home/travis/narwhal/bin:$PATH" CAPP_BUILD="/home/travis/build/davidsiaw/cappuccino-demos/Build"
+before_install:
+- openssl aes-256-cbc -K $encrypted_73435ec80fa0_key -iv $encrypted_73435ec80fa0_iv
+  -in deploy-key.enc -out deploy-key -d
+- chmod 600 deploy-key
+- cp deploy-key ~/.ssh/id_rsa
+- curl https://raw.githubusercontent.com/cappuccino/cappuccino/v0.9.7-1/bootstrap.sh
+  > /tmp/cb.sh && bash /tmp/cb.sh --noprompt
+script:
+- bash deploy
