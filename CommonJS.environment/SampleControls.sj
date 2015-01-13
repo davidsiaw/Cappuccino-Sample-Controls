@@ -1,4 +1,4 @@
-@STATIC;1.0;p;15;AppController.jt;47793;@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.jt;47725;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);var defaultViewRect;
+@STATIC;1.0;p;15;AppController.jt;48503;@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.jt;48435;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);var defaultViewRect;
 var dataStructure = {name: "Root", sub: [{name: "Music", sub: ["file1.mp3", {name: "Daft Punk", sub: ["Digital Love", "One More Time", "High Life", "Veridis Quo"]}, "AwesomeSong.mp3", "AnotherAwesomeSong.mp3"]}, {name: "Pictures", sub: ["Picture1.jpg", "Picture2.jpg", "Picture3.jpg", "Picture4.jpg"]}, {name: "Code", sub: [{name: "SampleControls", sub: ["Item two", "Item three", "Item four"]}, {name: "Cappuccino", sub: [{name: "AppKit", sub: ["AppKit.j", {name: "Resources", sub: ["Image.png", "AboutPanel.cib", "Window.png", "Arist.psd"]}, "CPBrowser.j", "CPTableView.j", "CPButton.j"]}, "Foundation.j", "CPTableView.j", "Jakefile"]}, {name: "280Slides", sub: ["SlideController.j", "YouTubeController.j", "logo.png", "Side.j"]}, {name: "Atlas", sub: ["AwesomeController.j", "Icon.png", "Jakefile", "Server.js"]}]}, {name: "System", sub: [{name: "Library", sub: ["SpecialFile", "AnotherFile", "SecretStuff", "Scarry Stuff"]}]}, {name: "Applications", sub: ["XCode.app", "Atlas.app", "Kaleidoscope.app", "Issues.app"]}]};
 {var the_class = objj_allocateClassPair(CPObject, "AppController"),
 meta_class = the_class.isa;objj_registerClassPair(the_class);
@@ -19,10 +19,19 @@ class_addMethods(the_class, [new objj_method(sel_getUid("applicationDidFinishLau
         objj_msgSend(tabview, "addTabViewItem:", tab);
     }
     objj_msgSend(contentView, "addSubview:", tabview);
+    var mainMenu = objj_msgSend(objj_msgSend(CPApplication, "sharedApplication"), "mainMenu");
+    objj_msgSend(mainMenu, "addItem:", objj_msgSend(CPMenuItem, "separatorItem"));
+    objj_msgSend(mainMenu, "addItem:", objj_msgSend(CPMenuItem, "separatorItem"));
+    var clickToGithub = objj_msgSend(objj_msgSend(CPMenuItem, "alloc"), "initWithTitle:action:keyEquivalent:", "See the source!", sel_getUid("githubClicked:"), nil);
+    objj_msgSend(mainMenu, "addItem:", clickToGithub);
     objj_msgSend(theWindow, "orderFront:", self);
     objj_msgSend(CPMenu, "setMenuBarVisible:", YES);
 }
-,["void","CPNotification"])]);
+,["void","CPNotification"]), new objj_method(sel_getUid("githubClicked:"), function $AppController__githubClicked_(self, _cmd, sender)
+{
+    window.open("https://github.com/davidsiaw/cappuccino-demos/blob/master/source/AppController.j");
+}
+,["void","id"])]);
 }{var the_class = objj_allocateClassPair(CPObject, "SampleControlTabs"),
 meta_class = the_class.isa;objj_registerClassPair(the_class);
 class_addMethods(meta_class, [new objj_method(sel_getUid("generalHud"), function $SampleControlTabs__generalHud(self, _cmd)
