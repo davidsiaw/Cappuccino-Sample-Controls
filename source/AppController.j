@@ -48,17 +48,35 @@ var dataStructure = {name: "Root", sub: [
         [tab setLabel:items[i]];
         [tab setView:objj_msgSend(SampleControlTabs, items[i], nil)];
 
-
         [tabview addTabViewItem:tab];
     }
 
     [contentView addSubview:tabview];
 
+    /* This is how you get a reference to the main menu */
+    var mainMenu = [[CPApplication sharedApplication] mainMenu];
+
+    /* Separators separate the left, center and right menu items 
+
+        By adding two separators my next item will be right-aligned.
+
+    */
+    [mainMenu addItem:[CPMenuItem separatorItem]]; 
+    [mainMenu addItem:[CPMenuItem separatorItem]];
+
+    /* Make a new menu item and add it */
+    var clickToGithub = [[CPMenuItem alloc] initWithTitle:"See the source!" action:@selector(githubClicked:) keyEquivalent:nil];
+    [mainMenu addItem:clickToGithub];
 
     [theWindow orderFront:self];
 
     // Uncomment the following line to turn on the standard menu bar.
     [CPMenu setMenuBarVisible:YES];
+}
+
+-(void)githubClicked:(id)sender
+{
+    window.open("https://github.com/davidsiaw/cappuccino-demos/blob/master/source/AppController.j");
 }
 
 @end
